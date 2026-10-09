@@ -40,7 +40,7 @@ Select the intended Bifrost instance and organization, then install from Git so 
 bifrost solution install-repo https://github.com/gobifrost/bifrost-dmarc.git --ref main
 ```
 
-The selected instance must support the trusted webhook `raw_body_base64` handoff added by [Bifrost PR #945](https://github.com/gobifrost/bifrost/pull/945). Existing instances need that platform update before enabling signed ingestion.
+The selected instance must support the trusted webhook `raw_body_base64` handoff added by [Bifrost PR #945](https://github.com/gobifrost/bifrost/pull/945). Existing instances need that platform update before enabling signed ingestion. This release was verified on `1.4.2-dev.1791511806` in both a personal installation and production.
 
 1. Install or deploy the Solution.
 2. Add intended operators to the **DMARC Users** role. The app, every workflow, the agent, and table access all require this role.
