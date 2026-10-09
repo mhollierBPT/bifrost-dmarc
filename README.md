@@ -101,6 +101,8 @@ Selecting a domain shows the imported sender mechanisms, observed message volume
 
 ## Local verification
 
+Bifrost supplies the app SDK from the selected instance during deployment and local development. No instance-specific SDK download URL belongs in this repository. For app development, run `bifrost solution start bifrost-dmarc` from the Solution root to prepare the instance-matched SDK and development environment before the frontend checks below.
+
 ```bash
 python3 -m pytest -q
 cd apps/bifrost-dmarc
