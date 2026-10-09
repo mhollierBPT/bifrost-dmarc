@@ -1,0 +1,19 @@
+connections:
+  CloudFlare:
+    integration_name: CloudFlare
+    template:
+      config_schema:
+        - key: api_key
+          type: secret
+          required: true
+          position: 0
+    position: 0
+  Resend:
+    integration_name: Resend
+    template:
+      config_schema:
+        - key: api_key
+          type: secret
+          required: true
+          position: 0
+    position: 1

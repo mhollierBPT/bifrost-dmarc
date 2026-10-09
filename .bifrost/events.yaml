@@ -1,0 +1,52 @@
+events:
+  3174b264-a43c-4283-95f3-3b13183b9d3b:
+    id: 3174b264-a43c-4283-95f3-3b13183b9d3b
+    name: DMARC Inbound
+    source_type: webhook
+    is_active: true
+    adapter_name: generic
+    webhook_config:
+      event_type_field: type
+    rate_limit_per_minute: 120
+    rate_limit_window_seconds: 60
+    rate_limit_enabled: true
+    subscriptions:
+      - id: 0635e5d8-ed0b-4c54-b852-3bd1d0fe22ee
+        target_type: workflow
+        workflow_id: c0bc9706-8837-4835-a006-b77177eccfcf
+        event_type: email.received
+        is_active: true
+  a8d30213-9d3e-4bb5-adcd-6a94622f3fe3:
+    id: a8d30213-9d3e-4bb5-adcd-6a94622f3fe3
+    name: DMARC 60-Day Retention
+    source_type: schedule
+    is_active: true
+    cron_expression: "17 3 * * *"
+    timezone: America/New_York
+    schedule_enabled: true
+    overlap_policy: skip
+    subscriptions:
+      - id: 83159128-40ff-4b95-9b36-15421e5fa58e
+        target_type: workflow
+        workflow_id: 2a82020d-8a48-4435-8966-c48b2ac3a802
+        input_mapping:
+          days: 60
+        is_active: true
+  3b0ae499-1094-4251-af53-1565ff4699e1:
+    id: 3b0ae499-1094-4251-af53-1565ff4699e1
+    name: DMARC Nightly DNS Review
+    source_type: schedule
+    is_active: true
+    cron_expression: "41 3 * * *"
+    timezone: America/New_York
+    schedule_enabled: true
+    overlap_policy: skip
+    subscriptions:
+      - id: 3c59d26b-29ad-4ef2-a3e2-bfe8f5cdebc0
+        target_type: workflow
+        workflow_id: 8f6d3441-19bb-470c-b771-654e46928006
+        is_active: true
+      - id: b5e1bb9c-0edb-42b9-a246-7276bd08ba1d
+        target_type: workflow
+        workflow_id: c37112ad-626b-4a34-bb3a-6f0f3d74f792
+        is_active: true

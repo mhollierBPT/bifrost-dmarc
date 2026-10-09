@@ -1,0 +1,13 @@
+configs:
+  dmarc_reporting_domain:
+    id: a663616e-bbae-4d72-a11c-43b7a17477ae
+    key: dmarc_reporting_domain
+    type: string
+    required: true
+    position: 0
+  resend_signing_secret:
+    id: 72428722-9044-439d-a946-b86a7e77e0ed
+    key: resend_signing_secret
+    type: secret
+    required: true
+    position: 1

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feedback>
+  <report_metadata>
+    <org_name>Google Inc.</org_name>
+    <email>noreply-dmarc-support@google.com</email>
+    <report_id>bifrost-dmarc-poc-20260813</report_id>
+    <date_range><begin>1786579200</begin><end>1786665599</end></date_range>
+  </report_metadata>
+  <policy_published>
+    <domain>example.com</domain><adkim>r</adkim><aspf>r</aspf><p>quarantine</p><pct>100</pct>
+  </policy_published>
+  <record>
+    <row>
+      <source_ip>192.0.2.10</source_ip><count>5987</count>
+      <policy_evaluated><disposition>none</disposition><dkim>pass</dkim><spf>fail</spf></policy_evaluated>
+    </row>
+    <identifiers><header_from>example.com</header_from></identifiers>
+    <auth_results>
+      <dkim><domain>selector.onmicrosoft.com</domain><selector>selector1</selector><result>pass</result></dkim>
+      <spf><domain>bounce.example.net</domain><scope>mfrom</scope><result>fail</result></spf>
+    </auth_results>
+  </record>
+  <record>
+    <row>
+      <source_ip>198.51.100.20</source_ip><count>13</count>
+      <policy_evaluated>
+        <disposition>none</disposition><dkim>fail</dkim><spf>fail</spf>
+        <reason><type>forwarded</type><comment>known forwarder</comment></reason>
+      </policy_evaluated>
+    </row>
+    <identifiers><header_from>example.com</header_from></identifiers>
+    <auth_results><spf><domain>forwarder.example</domain><result>pass</result></spf></auth_results>
+  </record>
+</feedback>

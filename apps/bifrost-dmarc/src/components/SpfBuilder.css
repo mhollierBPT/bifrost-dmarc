@@ -1,0 +1,316 @@
+.spf-workbench {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid var(--bf-line);
+  border-radius: var(--bf-radius-feature);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bf-cool) 54%, var(--bf-paper)) 0%, var(--bf-paper) 100%);
+  box-shadow: var(--bf-shadow-float);
+}
+
+.spf-workbench__header,
+.spf-workbench__composer-header,
+.spf-workbench__policy {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.spf-workbench__title,
+.spf-workbench__composer-header > div,
+.spf-workbench__policy-copy {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.spf-workbench__header h3,
+.spf-workbench__composer-header h4,
+.spf-workbench__policy h4 {
+  margin: 0;
+  color: var(--bf-ink);
+  font-family: var(--bf-font-display);
+  letter-spacing: -.03em;
+}
+
+.spf-workbench__header h3 {
+  font-size: 1.1rem;
+}
+
+.spf-workbench__composer-header h4,
+.spf-workbench__policy h4 {
+  font-size: 0.95rem;
+}
+
+.spf-workbench__header p,
+.spf-workbench__composer-header p,
+.spf-workbench__policy p {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--bf-muted);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.spf-workbench__count {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 10px;
+  border: 1px solid var(--bf-line);
+  border-radius: 999px;
+  background: var(--bf-cool);
+  color: var(--bf-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.spf-workbench__list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.spf-workbench__source,
+.spf-workbench__empty {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 10px 12px;
+  border: 1px solid var(--bf-line);
+  border-radius: var(--bf-radius-surface);
+  background: var(--bf-paper);
+}
+
+.spf-workbench__source-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--bf-radius-surface);
+  background: color-mix(in srgb, var(--bf-primary) 11%, var(--bf-cool));
+  color: var(--bf-primary);
+}
+
+.spf-workbench__source-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.spf-workbench__source-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.spf-workbench__source-copy strong {
+  color: var(--bf-ink);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.spf-workbench__source-copy code {
+  overflow: hidden;
+  padding: 0;
+  background: transparent;
+  color: var(--bf-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.spf-workbench__empty {
+  color: var(--bf-muted);
+  justify-items: center;
+  text-align: center;
+  font-size: 0.74rem;
+}
+
+.spf-workbench__composer,
+.spf-workbench__policy {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--bf-line);
+  border-radius: var(--bf-radius-surface);
+  background: var(--bf-cool);
+}
+
+.spf-workbench__mechanisms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.spf-workbench__mechanism {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-height: 54px;
+  padding: 10px 11px;
+  border: 1px solid var(--bf-line);
+  border-radius: 12px;
+  background: var(--bf-paper);
+  color: var(--bf-muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--bf-motion-feedback) var(--bf-ease-standard), background var(--bf-motion-feedback) var(--bf-ease-standard), color var(--bf-motion-feedback) var(--bf-ease-standard), transform var(--bf-motion-feedback) var(--bf-ease-out);
+}
+
+.spf-workbench__mechanism:hover {
+  border-color: var(--bf-line-strong);
+  background: color-mix(in srgb, var(--bf-primary) 6%, var(--bf-paper));
+  color: var(--bf-ink);
+}
+
+.spf-workbench__mechanism:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--bf-primary) 24%, transparent);
+  outline-offset: 2px;
+}
+
+.spf-workbench__mechanism:active {
+  transform: translateY(1px);
+}
+
+.spf-workbench__mechanism.is-selected {
+  border-color: color-mix(in srgb, var(--bf-primary) 42%, var(--bf-line));
+  background: color-mix(in srgb, var(--bf-primary) 10%, var(--bf-paper));
+  color: var(--bf-primary);
+}
+
+.spf-workbench__mechanism-icon {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+}
+
+.spf-workbench__mechanism-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.spf-workbench__mechanism-copy {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.spf-workbench__mechanism-copy strong {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.spf-workbench__mechanism-copy small {
+  color: inherit;
+  font-size: 0.64rem;
+  line-height: 1.25;
+}
+
+.spf-workbench__advanced {
+  display: grid;
+  gap: 12px;
+}
+
+.spf-workbench__field {
+  width: 100%;
+}
+
+.spf-workbench__field .bds-field__label {
+  font-size: 0.76rem;
+}
+
+.spf-workbench__field .bds-field__control input,
+.spf-workbench__field select {
+  background: var(--bf-paper);
+}
+
+.spf-workbench__composer-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.spf-workbench__submit {
+  min-width: 160px;
+}
+
+.spf-workbench__policy {
+  align-items: start;
+}
+
+.spf-workbench__policy .spf-workbench__field {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+}
+
+.spf-workbench__redirect-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 320px;
+  margin-left: 0;
+  color: var(--bf-muted);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.spf-workbench__redirect-note svg {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  color: var(--bf-primary);
+}
+
+.spf-workbench__redirect-note code {
+  padding: 0;
+  background: transparent;
+  color: var(--bf-ink);
+}
+
+@media (max-width: 760px) {
+  .spf-workbench {
+    padding: 14px;
+  }
+
+  .spf-workbench__header,
+  .spf-workbench__composer-header,
+  .spf-workbench__policy {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .spf-workbench__count {
+    width: fit-content;
+  }
+
+  .spf-workbench__source,
+  .spf-workbench__empty {
+    grid-template-columns: 34px minmax(0, 1fr);
+  }
+
+  .spf-workbench__mechanisms {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .spf-workbench__submit,
+  .spf-workbench__policy .spf-workbench__field,
+  .spf-workbench__redirect-note {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spf-workbench__mechanism {
+    transition: none;
+  }
+}

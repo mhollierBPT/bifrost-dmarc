@@ -1,0 +1,16 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Dependency, build, and tool caches
+node_modules/
+dist/
+.vite/
+.cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+
+# Platform SDK packages injected for local frontend verification
+*.tgz

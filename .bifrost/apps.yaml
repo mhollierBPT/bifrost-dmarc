@@ -1,0 +1,13 @@
+apps:
+  a1c48c6c-8dc3-4cf4-93e8-f2ef1fb28dcd:
+    id: a1c48c6c-8dc3-4cf4-93e8-f2ef1fb28dcd
+    slug: bifrost-dmarc
+    name: Bifrost DMARC
+    description: Multi-organization DMARC reporting with Resend inbound email and cached Cloudflare domains.
+    path: apps/bifrost-dmarc
+    logo: public/bifrost-dmarc-icon.png
+    app_model: standalone_v2
+    dependencies: {}
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]

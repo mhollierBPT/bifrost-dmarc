@@ -1,0 +1,217 @@
+workflows:
+  c37112ad-626b-4a34-bb3a-6f0f3d74f792:
+    id: c37112ad-626b-4a34-bb3a-6f0f3d74f792
+    name: dmarc_refresh_public_dns_domains
+    path: functions/dmarc.py
+    function_name: refresh_public_dns_domains
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  8f6d3441-19bb-470c-b771-654e46928006:
+    id: 8f6d3441-19bb-470c-b771-654e46928006
+    name: dmarc_sync_cloudflare_domains
+    path: functions/dmarc.py
+    function_name: sync_cloudflare_domains
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  a82cd678-7d35-46ab-bdf2-5943777323ec:
+    id: a82cd678-7d35-46ab-bdf2-5943777323ec
+    name: dmarc_map_domain
+    path: functions/dmarc.py
+    function_name: map_domain
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  ad03449b-cf50-46a0-8cb9-37cd4f8f8954:
+    id: ad03449b-cf50-46a0-8cb9-37cd4f8f8954
+    name: dmarc_map_cloudflare_account
+    path: functions/dmarc.py
+    function_name: map_cloudflare_account
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  c0bc9706-8837-4835-a006-b77177eccfcf:
+    id: c0bc9706-8837-4835-a006-b77177eccfcf
+    name: dmarc_ingest_resend_event
+    path: functions/dmarc.py
+    function_name: ingest_resend_event
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  2728c987-dd47-4d63-b0d6-c8df1b4f2785:
+    id: 2728c987-dd47-4d63-b0d6-c8df1b4f2785
+    name: dmarc_ingest_synthetic_report
+    path: functions/dmarc.py
+    function_name: ingest_synthetic_report
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  97d59e01-8548-4041-972c-e6850a1bda47:
+    id: 97d59e01-8548-4041-972c-e6850a1bda47
+    name: dmarc_get_dashboard
+    path: functions/dmarc.py
+    function_name: get_dashboard
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  b88f88c4-6d83-4bbf-b8fb-f4a0fe690dd7:
+    id: b88f88c4-6d83-4bbf-b8fb-f4a0fe690dd7
+    name: dmarc_get_app_context
+    path: functions/dmarc.py
+    function_name: get_app_context
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  2a82020d-8a48-4435-8966-c48b2ac3a802:
+    id: 2a82020d-8a48-4435-8966-c48b2ac3a802
+    name: dmarc_apply_retention
+    path: functions/dmarc.py
+    function_name: apply_retention
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  c1601caf-3338-499f-a651-ef1daeb5d99b:
+    id: c1601caf-3338-499f-a651-ef1daeb5d99b
+    name: dmarc_create_email_investigation
+    path: functions/dmarc.py
+    function_name: create_email_investigation
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  d3472637-0261-4c84-8eac-6f51b139d859:
+    id: d3472637-0261-4c84-8eac-6f51b139d859
+    name: dmarc_analyze_eml_upload
+    path: functions/dmarc.py
+    function_name: analyze_eml_upload
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  1ef8145e-522e-4db9-a02f-71730436751a:
+    id: 1ef8145e-522e-4db9-a02f-71730436751a
+    name: dmarc_compare_dns_record
+    path: functions/dmarc.py
+    function_name: compare_dns_record
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  666415e1-b9fd-41d9-8845-40825ada5ea4:
+    id: 666415e1-b9fd-41d9-8845-40825ada5ea4
+    name: dmarc_apply_dns_record
+    path: functions/dmarc.py
+    function_name: apply_dns_record
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  4ad5f4a7-21c8-4d82-a2cc-d6acdb66f42c:
+    id: 4ad5f4a7-21c8-4d82-a2cc-d6acdb66f42c
+    name: dmarc_configure_resend_signing_secret
+    path: functions/dmarc.py
+    function_name: configure_resend_signing_secret
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  9b7ca49f-2778-44bc-a9c0-4a96574412aa:
+    id: 9b7ca49f-2778-44bc-a9c0-4a96574412aa
+    name: dmarc_reconcile_cloudflare_integration_mappings
+    path: functions/dmarc.py
+    function_name: reconcile_cloudflare_integration_mappings
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  ffb9f640-7460-46d6-bcda-59b320f32d66:
+    id: ffb9f640-7460-46d6-bcda-59b320f32d66
+    name: dmarc_import_domain_source_inventory
+    path: functions/dmarc.py
+    function_name: import_domain_source_inventory
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  0daa6726-94e6-4a80-be3b-dd610ad12169:
+    id: 0daa6726-94e6-4a80-be3b-dd610ad12169
+    name: dmarc_create_manual_domain
+    path: functions/dmarc.py
+    function_name: create_manual_domain
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  7f0c9599-5d56-47e3-8bef-aa894eaa0315:
+    id: 7f0c9599-5d56-47e3-8bef-aa894eaa0315
+    name: dmarc_set_domain_lifecycle
+    path: functions/dmarc.py
+    function_name: set_domain_lifecycle
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  3f4d3186-1c2c-4073-acf1-ffd450891436:
+    id: 3f4d3186-1c2c-4073-acf1-ffd450891436
+    name: dmarc_bulk_domain_lifecycle
+    path: functions/dmarc.py
+    function_name: bulk_domain_lifecycle
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  b7a72887-5bd9-4b77-8e38-9910d80360a3:
+    id: b7a72887-5bd9-4b77-8e38-9910d80360a3
+    name: dmarc_process_migration
+    path: functions/dmarc.py
+    function_name: process_dmarc_migration
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  630522bf-e374-4e8f-91ea-1156448b52d6:
+    id: 630522bf-e374-4e8f-91ea-1156448b52d6
+    name: bifrost_dmarc_review_domains
+    path: functions/dmarc_agent.py
+    function_name: review_domains
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  5388bb38-237b-4335-a9db-cc355ca9b462:
+    id: 5388bb38-237b-4335-a9db-cc355ca9b462
+    name: bifrost_dmarc_investigate_failures
+    path: functions/dmarc_agent.py
+    function_name: investigate_failures
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  a4b8e4e1-a8f1-4699-891e-55771847156b:
+    id: a4b8e4e1-a8f1-4699-891e-55771847156b
+    name: bifrost_dmarc_manage_migration
+    path: functions/dmarc_agent.py
+    function_name: manage_migration
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]
+  1e46aa97-9ddf-4916-85ab-405aa3b46c7a:
+    id: 1e46aa97-9ddf-4916-85ab-405aa3b46c7a
+    name: bifrost_dmarc_email_test
+    path: functions/dmarc_agent.py
+    function_name: email_test
+    category: DMARC
+    access_level: role_based
+    roles: []
+    role_names: [DMARC Users]

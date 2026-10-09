@@ -1,0 +1,10 @@
+From: Sender <sender@example.com>
+To: Recipient <recipient@example.net>
+Subject: Bifrost DMARC investigation fixture
+Message-ID: <bifrost-dmarc-fixture@example.com>
+Return-Path: <bounce@example.com>
+Authentication-Results: mx.example.net; dmarc=pass header.from=example.com; dkim=pass header.d=example.com; spf=pass smtp.mailfrom=example.com
+DKIM-Signature: v=1; d=example.com; s=selector; b=fixture
+Received: from mail.example.com by mx.example.net
+
+This body exists only to prove that the investigation result does not return message content.

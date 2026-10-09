@@ -1,0 +1,5 @@
+slug: bifrost-dmarc
+name: Bifrost DMARC
+version: 0.6.20
+allow_outbound_access: false
+logo: apps/bifrost-dmarc/public/bifrost-dmarc-icon.png
