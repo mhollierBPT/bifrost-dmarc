@@ -1,0 +1,32 @@
+name: Sync upstream (BPT)
+
+# Weekly + manual only. Public repo: Actions minutes are not billed.
+on:
+  schedule:
+    - cron: "23 7 * * 1"   # Mondays 07:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bpt-sync-upstream-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+      - name: PyYAML
+        run: python3 -m venv /tmp/venv && /tmp/venv/bin/pip install --quiet pyyaml==6.0.3
+      - name: Rebuild main from upstream + fix
+        env:
+          UPSTREAM_REPO: gobifrost/bifrost-dmarc
+          PYTHON: /tmp/venv/bin/python
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
+        run: bash tools/bpt_sync_upstream.sh
