@@ -1,21 +1,3 @@
-_anchors:
-  policies:
-    - &admin_bypass
-      name: admin_bypass
-      description: Platform administrators may manage Bifrost DMARC data.
-      actions: [read, create, update, delete]
-      when: {user: is_platform_admin}
-    - &dmarc_users_read
-      name: dmarc_users_read
-      description: DMARC Users may read DMARC data through the app.
-      actions: [read]
-      when: {call: has_role, args: [DMARC Users]}
-    - &dmarc_users_write
-      name: dmarc_users_write
-      description: DMARC Users may maintain DMARC data.
-      actions: [create, update, delete]
-      when: {call: has_role, args: [DMARC Users]}
-
 tables:
   8c60dabc-dc6c-45a7-84f6-a2588933be75:
     id: 8c60dabc-dc6c-45a7-84f6-a2588933be75
@@ -23,270 +5,744 @@ tables:
     description: Cached domain inventory, DNS-provider discovery, email-authentication state, and Bifrost organization mappings.
     schema:
       columns:
-        - {name: domain, type: string, required: true}
-        - {name: organization_id, type: string}
-        - {name: organization_name, type: string}
-        - {name: mapping_status, type: string}
-        - {name: mapping_source, type: string}
-        - {name: cloudflare_zone_id, type: string}
-        - {name: cloudflare_account_id, type: string}
-        - {name: cloudflare_account_name, type: string}
-        - {name: cloudflare_status, type: string}
-        - {name: dmarc_record, type: string}
-        - {name: dmarc_record_id, type: string}
-        - {name: dmarc_record_count, type: integer}
-        - {name: dmarc_record_type, type: string}
-        - {name: dmarc_cname_target, type: string}
-        - {name: dmarc_managed_provider, type: string}
-        - {name: dmarc_status, type: string}
-        - {name: dmarc_verification_status, type: string}
-        - {name: dmarc_verification_error, type: string}
-        - {name: dmarc_verified_at, type: datetime}
-        - {name: dmarc_policy, type: string}
-        - {name: dmarc_subdomain_policy, type: string}
-        - {name: dmarc_pct, type: integer}
-        - {name: rua, type: string}
-        - {name: has_dmarc, type: boolean}
-        - {name: spf_record, type: string}
-        - {name: spf_record_id, type: string}
-        - {name: spf_record_count, type: integer}
-        - {name: spf_terms, type: json}
-        - {name: spf_status, type: string}
-        - {name: mx_records, type: json}
-        - {name: mx_provider, type: string}
-        - {name: mx_status, type: string}
-        - {name: mx_lookup_error, type: string}
-        - {name: mx_checked_at, type: datetime}
-        - {name: email_usage_override, type: string}
-        - {name: dns_lookup_status, type: string}
-        - {name: dns_lookup_source, type: string}
-        - {name: dns_lookup_error, type: string}
-        - {name: nameservers, type: json}
-        - {name: soa_nameserver, type: string}
-        - {name: dns_provider, type: string}
-        - {name: dns_provider_source, type: string}
-        - {name: dns_provider_confidence, type: string}
-        - {name: domain_connect_provider_id, type: string}
-        - {name: domain_connect_endpoint, type: string}
-        - {name: dns_management_url, type: string}
-        - {name: dns_provider_checked_at, type: datetime}
-        - {name: registration_status, type: string}
-        - {name: registration_source, type: string}
-        - {name: registration_error, type: string}
-        - {name: registration_checked_at, type: datetime}
-        - {name: source_inventory_origin, type: string}
-        - {name: source_inventory_status, type: string}
-        - {name: source_inventory_verified, type: boolean}
-        - {name: source_inventory_imported_at, type: datetime}
-        - {name: source_inventory_count, type: integer}
-        - {name: cloudflare_inventory_status, type: string}
-        - {name: inventory_status, type: string}
-        - {name: management_mode, type: string}
-        - {name: lifecycle_status, type: string}
-        - {name: orphan_status, type: string}
-        - {name: orphaned_at, type: datetime}
-        - {name: archived_at, type: datetime}
-        - {name: archive_reason, type: string}
-        - {name: archive_source, type: string}
-        - {name: auto_archived_at, type: datetime}
-        - {name: cloudflare_last_seen_at, type: datetime}
-        - {name: cached_at, type: datetime}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: domain
+        type: string
+        required: true
+      - name: organization_id
+        type: string
+      - name: organization_name
+        type: string
+      - name: mapping_status
+        type: string
+      - name: mapping_source
+        type: string
+      - name: cloudflare_zone_id
+        type: string
+      - name: cloudflare_account_id
+        type: string
+      - name: cloudflare_account_name
+        type: string
+      - name: cloudflare_status
+        type: string
+      - name: dmarc_record
+        type: string
+      - name: dmarc_record_id
+        type: string
+      - name: dmarc_record_count
+        type: integer
+      - name: dmarc_record_type
+        type: string
+      - name: dmarc_cname_target
+        type: string
+      - name: dmarc_managed_provider
+        type: string
+      - name: dmarc_status
+        type: string
+      - name: dmarc_verification_status
+        type: string
+      - name: dmarc_verification_error
+        type: string
+      - name: dmarc_verified_at
+        type: datetime
+      - name: dmarc_policy
+        type: string
+      - name: dmarc_subdomain_policy
+        type: string
+      - name: dmarc_pct
+        type: integer
+      - name: rua
+        type: string
+      - name: has_dmarc
+        type: boolean
+      - name: spf_record
+        type: string
+      - name: spf_record_id
+        type: string
+      - name: spf_record_count
+        type: integer
+      - name: spf_terms
+        type: json
+      - name: spf_status
+        type: string
+      - name: mx_records
+        type: json
+      - name: mx_provider
+        type: string
+      - name: mx_status
+        type: string
+      - name: mx_lookup_error
+        type: string
+      - name: mx_checked_at
+        type: datetime
+      - name: email_usage_override
+        type: string
+      - name: dns_lookup_status
+        type: string
+      - name: dns_lookup_source
+        type: string
+      - name: dns_lookup_error
+        type: string
+      - name: nameservers
+        type: json
+      - name: soa_nameserver
+        type: string
+      - name: dns_provider
+        type: string
+      - name: dns_provider_source
+        type: string
+      - name: dns_provider_confidence
+        type: string
+      - name: domain_connect_provider_id
+        type: string
+      - name: domain_connect_endpoint
+        type: string
+      - name: dns_management_url
+        type: string
+      - name: dns_provider_checked_at
+        type: datetime
+      - name: registration_status
+        type: string
+      - name: registration_source
+        type: string
+      - name: registration_error
+        type: string
+      - name: registration_checked_at
+        type: datetime
+      - name: source_inventory_origin
+        type: string
+      - name: source_inventory_status
+        type: string
+      - name: source_inventory_verified
+        type: boolean
+      - name: source_inventory_imported_at
+        type: datetime
+      - name: source_inventory_count
+        type: integer
+      - name: cloudflare_inventory_status
+        type: string
+      - name: inventory_status
+        type: string
+      - name: management_mode
+        type: string
+      - name: lifecycle_status
+        type: string
+      - name: orphan_status
+        type: string
+      - name: orphaned_at
+        type: datetime
+      - name: archived_at
+        type: datetime
+      - name: archive_reason
+        type: string
+      - name: archive_source
+        type: string
+      - name: auto_archived_at
+        type: datetime
+      - name: cloudflare_last_seen_at
+        type: datetime
+      - name: cached_at
+        type: datetime
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   c1b38bd0-3299-4fe3-bbb5-947efd036ec5:
     id: c1b38bd0-3299-4fe3-bbb5-947efd036ec5
     name: dmarc_spf_sources
     description: Ordinary operator-managed SPF source rows, including imported starting inventory and observed volume.
     schema:
       columns:
-        - {name: domain, type: string, required: true}
-        - {name: source_name, type: string, required: true}
-        - {name: spf_part, type: string}
-        - {name: spf_type, type: string}
-        - {name: spf_value, type: string}
-        - {name: spf_capability, type: string}
-        - {name: enabled, type: boolean}
-        - {name: notes, type: string}
-        - {name: volume, type: integer}
-        - {name: ordering, type: integer}
-        - {name: external_id, type: string}
-        - {name: source_origin, type: string}
-        - {name: provider, type: json}
-        - {name: configuration, type: json}
-        - {name: imported_at, type: datetime}
-        - {name: last_checked, type: datetime}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: domain
+        type: string
+        required: true
+      - name: source_name
+        type: string
+        required: true
+      - name: spf_part
+        type: string
+      - name: spf_type
+        type: string
+      - name: spf_value
+        type: string
+      - name: spf_capability
+        type: string
+      - name: enabled
+        type: boolean
+      - name: notes
+        type: string
+      - name: volume
+        type: integer
+      - name: ordering
+        type: integer
+      - name: external_id
+        type: string
+      - name: source_origin
+        type: string
+      - name: provider
+        type: json
+      - name: configuration
+        type: json
+      - name: imported_at
+        type: datetime
+      - name: last_checked
+        type: datetime
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   293818cc-bf25-485d-af23-f36e461a94bd:
     id: 293818cc-bf25-485d-af23-f36e461a94bd
     name: dmarc_reports
     description: One row per unique aggregate report received from a mailbox provider.
     schema:
       columns:
-        - {name: report_id, type: string, required: true}
-        - {name: reporter, type: string}
-        - {name: reporter_email, type: string}
-        - {name: date_begin, type: datetime}
-        - {name: date_end, type: datetime}
-        - {name: domain, type: string, required: true}
-        - {name: organization_id, type: string}
-        - {name: organization_name, type: string}
-        - {name: policy, type: json}
-        - {name: record_count, type: integer}
-        - {name: message_count, type: integer}
-        - {name: email_id, type: string}
-        - {name: svix_id, type: string}
-        - {name: filename, type: string}
-        - {name: ingested_at, type: datetime}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: report_id
+        type: string
+        required: true
+      - name: reporter
+        type: string
+      - name: reporter_email
+        type: string
+      - name: date_begin
+        type: datetime
+      - name: date_end
+        type: datetime
+      - name: domain
+        type: string
+        required: true
+      - name: organization_id
+        type: string
+      - name: organization_name
+        type: string
+      - name: policy
+        type: json
+      - name: record_count
+        type: integer
+      - name: message_count
+        type: integer
+      - name: email_id
+        type: string
+      - name: svix_id
+        type: string
+      - name: filename
+        type: string
+      - name: ingested_at
+        type: datetime
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   7952c497-d881-4eef-af46-3e0d789ca30c:
     id: 7952c497-d881-4eef-af46-3e0d789ca30c
     name: dmarc_records
     description: Provider-aggregated DMARC record combinations; counts represent messages, not individual rows.
     schema:
       columns:
-        - {name: report_key, type: string, required: true}
-        - {name: report_id, type: string}
-        - {name: date, type: string}
-        - {name: domain, type: string, required: true}
-        - {name: organization_id, type: string}
-        - {name: organization_name, type: string}
-        - {name: source_ip, type: string}
-        - {name: count, type: integer}
-        - {name: disposition, type: string}
-        - {name: dkim, type: string}
-        - {name: spf, type: string}
-        - {name: classification, type: string}
-        - {name: header_from, type: string}
-        - {name: envelope_from, type: string}
-        - {name: envelope_to, type: string}
-        - {name: sending_source, type: string}
-        - {name: reasons, type: json}
-        - {name: auth_results, type: json}
-        - {name: ingested_at, type: datetime}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: report_key
+        type: string
+        required: true
+      - name: report_id
+        type: string
+      - name: date
+        type: string
+      - name: domain
+        type: string
+        required: true
+      - name: organization_id
+        type: string
+      - name: organization_name
+        type: string
+      - name: source_ip
+        type: string
+      - name: count
+        type: integer
+      - name: disposition
+        type: string
+      - name: dkim
+        type: string
+      - name: spf
+        type: string
+      - name: classification
+        type: string
+      - name: header_from
+        type: string
+      - name: envelope_from
+        type: string
+      - name: envelope_to
+        type: string
+      - name: sending_source
+        type: string
+      - name: reasons
+        type: json
+      - name: auth_results
+        type: json
+      - name: ingested_at
+        type: datetime
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   0c36a211-25d4-41d4-83a9-9ec95ad15ace:
     id: 0c36a211-25d4-41d4-83a9-9ec95ad15ace
     name: dmarc_daily_metrics
     description: Cached daily domain metrics used by the dashboard and source rankings.
     schema:
       columns:
-        - {name: date, type: string, required: true}
-        - {name: domain, type: string, required: true}
-        - {name: organization_id, type: string}
-        - {name: organization_name, type: string}
-        - {name: total, type: integer}
-        - {name: compliant, type: integer}
-        - {name: non_compliant, type: integer}
-        - {name: forwarded, type: integer}
-        - {name: threat_unknown, type: integer}
-        - {name: dkim_pass, type: integer}
-        - {name: spf_pass, type: integer}
-        - {name: sources, type: json}
-        - {name: updated_at, type: datetime}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: date
+        type: string
+        required: true
+      - name: domain
+        type: string
+        required: true
+      - name: organization_id
+        type: string
+      - name: organization_name
+        type: string
+      - name: total
+        type: integer
+      - name: compliant
+        type: integer
+      - name: non_compliant
+        type: integer
+      - name: forwarded
+        type: integer
+      - name: threat_unknown
+        type: integer
+      - name: dkim_pass
+        type: integer
+      - name: spf_pass
+        type: integer
+      - name: sources
+        type: json
+      - name: updated_at
+        type: datetime
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   72956897-718e-4589-9fbc-700ea2f06313:
     id: 72956897-718e-4589-9fbc-700ea2f06313
     name: dmarc_ingest_events
     description: Idempotency keys and processing status for Resend webhook deliveries.
     schema:
       columns:
-        - {name: svix_id, type: string}
-        - {name: email_id, type: string, required: true}
-        - {name: event_type, type: string}
-        - {name: status, type: string}
-        - {name: signature_status, type: string}
-        - {name: route, type: string}
-        - {name: recipients, type: json}
-        - {name: ignore_reason, type: string}
-        - {name: started_at, type: datetime}
-        - {name: completed_at, type: datetime}
-        - {name: report_count, type: integer}
-        - {name: message_count, type: integer}
-        - {name: error, type: string}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: svix_id
+        type: string
+      - name: email_id
+        type: string
+        required: true
+      - name: event_type
+        type: string
+      - name: status
+        type: string
+      - name: signature_status
+        type: string
+      - name: route
+        type: string
+      - name: recipients
+        type: json
+      - name: ignore_reason
+        type: string
+      - name: started_at
+        type: datetime
+      - name: completed_at
+        type: datetime
+      - name: report_count
+        type: integer
+      - name: message_count
+        type: integer
+      - name: error
+        type: string
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   c78d4e48-c539-48a3-bfa5-35973f626417:
     id: c78d4e48-c539-48a3-bfa5-35973f626417
     name: dmarc_investigations
     description: Time-limited inbound tests and privacy-preserving EML authentication analysis results.
     schema:
       columns:
-        - {name: token, type: string, required: true}
-        - {name: address, type: string}
-        - {name: status, type: string}
-        - {name: source, type: string}
-        - {name: email_id, type: string}
-        - {name: subject, type: string}
-        - {name: from_addresses, type: json}
-        - {name: to_addresses, type: json}
-        - {name: analysis, type: json}
-        - {name: created_at, type: datetime}
-        - {name: expires_at, type: datetime}
-        - {name: completed_at, type: datetime}
-        - {name: error, type: string}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: token
+        type: string
+        required: true
+      - name: address
+        type: string
+      - name: status
+        type: string
+      - name: source
+        type: string
+      - name: email_id
+        type: string
+      - name: subject
+        type: string
+      - name: from_addresses
+        type: json
+      - name: to_addresses
+        type: json
+      - name: analysis
+        type: json
+      - name: created_at
+        type: datetime
+      - name: expires_at
+        type: datetime
+      - name: completed_at
+        type: datetime
+      - name: error
+        type: string
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   808d795c-7f0f-4cc2-ae88-1e677c7e2952:
     id: 808d795c-7f0f-4cc2-ae88-1e677c7e2952
     name: dmarc_dns_changes
     description: Audit history for Solution-managed DMARC and SPF changes made through Cloudflare.
     schema:
       columns:
-        - {name: domain, type: string, required: true}
-        - {name: organization_id, type: string}
-        - {name: organization_name, type: string}
-        - {name: kind, type: string}
-        - {name: action, type: string}
-        - {name: previous_value, type: string}
-        - {name: new_value, type: string}
-        - {name: status, type: string}
-        - {name: error, type: string}
-        - {name: created_at, type: datetime}
-        - {name: completed_at, type: datetime}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: domain
+        type: string
+        required: true
+      - name: organization_id
+        type: string
+      - name: organization_name
+        type: string
+      - name: kind
+        type: string
+      - name: action
+        type: string
+      - name: previous_value
+        type: string
+      - name: new_value
+        type: string
+      - name: status
+        type: string
+      - name: error
+        type: string
+      - name: created_at
+        type: datetime
+      - name: completed_at
+        type: datetime
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   223d6a24-d950-4d61-bd0c-510a658e8ff3:
     id: 223d6a24-d950-4d61-bd0c-510a658e8ff3
     name: dmarc_migration_runs
     description: Durable bulk DMARC onboarding runs so progress and outcomes survive page navigation and reloads.
     schema:
       columns:
-        - {name: operation, type: string, required: true}
-        - {name: status, type: string, required: true}
-        - {name: requested, type: integer}
-        - {name: completed, type: integer}
-        - {name: skipped, type: integer}
-        - {name: failed, type: integer}
-        - {name: execution_id, type: string}
-        - {name: created_at, type: datetime}
-        - {name: started_at, type: datetime}
-        - {name: completed_at, type: datetime}
-        - {name: error, type: string}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
-
+      - name: operation
+        type: string
+        required: true
+      - name: status
+        type: string
+        required: true
+      - name: requested
+        type: integer
+      - name: completed
+        type: integer
+      - name: skipped
+        type: integer
+      - name: failed
+        type: integer
+      - name: execution_id
+        type: string
+      - name: created_at
+        type: datetime
+      - name: started_at
+        type: datetime
+      - name: completed_at
+        type: datetime
+      - name: error
+        type: string
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
   778ac497-22ff-4b2e-9267-b54a6d1ac95e:
     id: 778ac497-22ff-4b2e-9267-b54a6d1ac95e
     name: dmarc_migration_tasks
     description: Per-domain work and results for queued DMARC onboarding runs.
     schema:
       columns:
-        - {name: run_id, type: string, required: true}
-        - {name: domain_id, type: string, required: true}
-        - {name: domain, type: string, required: true}
-        - {name: organization_id, type: string}
-        - {name: organization_name, type: string}
-        - {name: operation, type: string, required: true}
-        - {name: status, type: string, required: true}
-        - {name: ordering, type: integer}
-        - {name: action, type: string}
-        - {name: previous_value, type: string}
-        - {name: new_value, type: string}
-        - {name: error, type: string}
-        - {name: created_at, type: datetime}
-        - {name: started_at, type: datetime}
-        - {name: completed_at, type: datetime}
-    policies: [*admin_bypass, *dmarc_users_read, *dmarc_users_write]
+      - name: run_id
+        type: string
+        required: true
+      - name: domain_id
+        type: string
+        required: true
+      - name: domain
+        type: string
+        required: true
+      - name: organization_id
+        type: string
+      - name: organization_name
+        type: string
+      - name: operation
+        type: string
+        required: true
+      - name: status
+        type: string
+        required: true
+      - name: ordering
+        type: integer
+      - name: action
+        type: string
+      - name: previous_value
+        type: string
+      - name: new_value
+        type: string
+      - name: error
+        type: string
+      - name: created_at
+        type: datetime
+      - name: started_at
+        type: datetime
+      - name: completed_at
+        type: datetime
+    policies:
+    - name: admin_bypass
+      description: Platform administrators may manage Bifrost DMARC data.
+      actions:
+      - read
+      - create
+      - update
+      - delete
+      when:
+        user: is_platform_admin
+    - name: dmarc_users_read
+      description: DMARC Users may read DMARC data through the app.
+      actions:
+      - read
+      when:
+        call: has_role
+        args:
+        - DMARC Users
+    - name: dmarc_users_write
+      description: DMARC Users may maintain DMARC data.
+      actions:
+      - create
+      - update
+      - delete
+      when:
+        call: has_role
+        args:
+        - DMARC Users
